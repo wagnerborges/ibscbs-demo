@@ -8,6 +8,7 @@ import br.gov.mg.sef.app.factory.MockData;
 import br.gov.mg.sef.app.model.Produto;
 import java.awt.Color;
 import java.awt.Component;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -27,6 +28,10 @@ import javax.swing.table.TableModel;
  */
 public class FPrincipal extends javax.swing.JFrame {
 
+    private String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+    private DecimalFormat decimalFormat = new DecimalFormat("#,##0.##");
+    
+    
     /**
      * Creates new form FPrincipal
      */
@@ -41,7 +46,7 @@ public class FPrincipal extends javax.swing.JFrame {
     }
 
     public void inicializarComponentes() {
-        String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+       
         jTextFieldDataOperacao.setText(data);
     }
 
@@ -1336,8 +1341,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jTextFieldTotal.setText(Double.toString(total));
     }//GEN-LAST:event_jTextFieldQuantidadeFocusLost
 
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public void calculoRegraGeral() {
         DefaultTableModel model = (DefaultTableModel) jTableOperacoes.getModel();
         Vector linha = new Vector();
 
@@ -1350,27 +1354,34 @@ public class FPrincipal extends javax.swing.JFrame {
         linha.add(produto);
         linha.add(jTextFieldValor.getText());
         linha.add(jTextFieldQuantidade.getText());
-        linha.add(jTextFieldTotal.getText());
+        
 
         double aliquotaIbs = Double.parseDouble(jTextFieldAliquotaIbs.getText()) / 100;
         double aliquotaCbs = Double.parseDouble(jTextFieldAliquotaCbs.getText()) / 100;
         double aliquotaIva = Double.parseDouble(jTextFieldAliquotaIvaDual.getText()) / 100;
 
         double subTotal = Double.parseDouble(jTextFieldTotal.getText());
+        
+        linha.add(decimalFormat.format(subTotal));
 
         double ibs = aliquotaIbs * subTotal;
         double cbs = aliquotaCbs * subTotal;
         double ivaDual = aliquotaIva * subTotal;
 
-        linha.add(Double.toString(ibs));
-        linha.add(Double.toString(cbs));
-        linha.add(Double.toString(ivaDual));
+        linha.add(decimalFormat.format(ibs));
+        linha.add(decimalFormat.format(cbs));
+        linha.add(decimalFormat.format(ivaDual));
 
         double total = (1 + aliquotaIva) * subTotal;
 
-        linha.add(Double.toString(total));
+        linha.add(decimalFormat.format(total));
 
         model.addRow(linha);
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        calculoRegraGeral();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1405,7 +1416,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
             String str = (String) value;
             if ("CRÉDITO".equals(str)) {
-                c.setForeground(Color.RED.RED);                
+                c.setForeground(Color.RED.RED);
             } else {
                 c.setForeground(Color.BLACK);
             }
