@@ -5,14 +5,19 @@
 package br.gov.mg.sef.app.forms;
 
 import br.gov.mg.sef.app.factory.MockData;
+import br.gov.mg.sef.app.model.Operacao;
 import br.gov.mg.sef.app.model.Produto;
+import br.gov.mg.sef.app.util.RegrasCalculo;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -30,8 +35,8 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     private DecimalFormat decimalFormat = new DecimalFormat("#,##0.##");
-    
-    
+    private Random random = new Random();
+
     /**
      * Creates new form FPrincipal
      */
@@ -46,7 +51,7 @@ public class FPrincipal extends javax.swing.JFrame {
     }
 
     public void inicializarComponentes() {
-       
+
         jTextFieldDataOperacao.setText(data);
     }
 
@@ -132,7 +137,8 @@ public class FPrincipal extends javax.swing.JFrame {
         jTextFieldAliquotaSplitSimplificado = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldAliquotaCashBack = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanelContribuinteA = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -179,15 +185,14 @@ public class FPrincipal extends javax.swing.JFrame {
         jTextFieldDataOperacao = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
+        jRadioButtonReducaoZero = new javax.swing.JRadioButton();
+        jRadioButtonReducao30 = new javax.swing.JRadioButton();
+        jRadioButtonReducao60 = new javax.swing.JRadioButton();
+        jRadioButtonReducao100 = new javax.swing.JRadioButton();
         jPanel14 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButtonSemSplit = new javax.swing.JRadioButton();
+        jRadioButtonSplitInteligente = new javax.swing.JRadioButton();
+        jRadioButtonSplitSimplificado = new javax.swing.JRadioButton();
         jPanel16 = new javax.swing.JPanel();
         jRadioButtonAB = new javax.swing.JRadioButton();
         jRadioButtonBA = new javax.swing.JRadioButton();
@@ -197,16 +202,17 @@ public class FPrincipal extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
-        jRadioButton13 = new javax.swing.JRadioButton();
-        jRadioButton14 = new javax.swing.JRadioButton();
-        jRadioButton15 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
+        jRadioButtonOperacaoIsenta = new javax.swing.JRadioButton();
+        jRadioButtonCreditoPresumido = new javax.swing.JRadioButton();
+        jRadioButtonDiferimento = new javax.swing.JRadioButton();
+        jTextFieldPercentualCreditoPresumido = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableOperacoesContribuinteA = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableOperacoesContribuinteB = new javax.swing.JTable();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -369,33 +375,12 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(555, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Outras Configurações"));
 
         jLabel28.setText("Alíquota Cash Back %");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField2.setText("2");
+        jTextFieldAliquotaCashBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextFieldAliquotaCashBack.setText("2");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -405,8 +390,8 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldAliquotaCashBack, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,9 +399,35 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addComponent(jTextFieldAliquotaCashBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sef-mg.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -424,19 +435,21 @@ public class FPrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel34)
+                .addGap(511, 511, 511))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(144, 144, 144)
+                .addComponent(jLabel34)
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Configurações Gerais", jPanel2);
@@ -451,9 +464,9 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jTextFieldRazaoSocial.setText("Fabricante do Melhor do Mundo");
 
-        jLabel12.setText("UF");
+        jLabel12.setText("UF*");
 
-        jLabel13.setText("Município");
+        jLabel13.setText("Município*");
 
         jComboBoxUfEmitente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -514,9 +527,9 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jTextFieldRazaoSocialDestinatario.setText("Varejista do Melhor do Mundo");
 
-        jLabel16.setText("UF");
+        jLabel16.setText("UF*");
 
-        jLabel17.setText("Município");
+        jLabel17.setText("Município*");
 
         jComboBoxUfDestinatario.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -582,9 +595,9 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel20.setText("UF");
+        jLabel20.setText("UF*");
 
-        jLabel21.setText("Município");
+        jLabel21.setText("Município*");
 
         jComboBoxUfConsumidorFinal.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -655,7 +668,7 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel22.setText("Código do Produto");
+        jLabel22.setText("Código do Produto*");
 
         jTextFieldDescricaoProduto.setEditable(false);
         jTextFieldDescricaoProduto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -669,7 +682,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jTextFieldValor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextFieldValor.setForeground(new java.awt.Color(0, 0, 204));
 
-        jLabel25.setText("Quantidade");
+        jLabel25.setText("Quantidade*");
 
         jTextFieldQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextFieldQuantidade.setForeground(new java.awt.Color(0, 0, 204));
@@ -703,7 +716,7 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableOperacoes);
 
-        jLabel27.setText("Data Operação");
+        jLabel27.setText("Data Operação*");
 
         jTextFieldDataOperacao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextFieldDataOperacao.setForeground(new java.awt.Color(0, 0, 204));
@@ -782,35 +795,31 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Regime Favorecido com Redução de Alíquota"));
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("0%");
+        buttonGroup2.add(jRadioButtonReducaoZero);
+        jRadioButtonReducaoZero.setSelected(true);
+        jRadioButtonReducaoZero.setText("0%");
 
-        buttonGroup2.add(jRadioButton5);
-        jRadioButton5.setText("30%");
+        buttonGroup2.add(jRadioButtonReducao30);
+        jRadioButtonReducao30.setText("30%");
 
-        buttonGroup2.add(jRadioButton6);
-        jRadioButton6.setText("40%");
+        buttonGroup2.add(jRadioButtonReducao60);
+        jRadioButtonReducao60.setText("60%");
 
-        buttonGroup2.add(jRadioButton7);
-        jRadioButton7.setText("60%");
-
-        buttonGroup2.add(jRadioButton8);
-        jRadioButton8.setText("100%");
+        buttonGroup2.add(jRadioButtonReducao100);
+        jRadioButtonReducao100.setText("100%");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(jRadioButton4)
+                .addComponent(jRadioButtonReducaoZero)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton8)
+                .addComponent(jRadioButtonReducao30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonReducao60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonReducao100)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -818,24 +827,24 @@ public class FPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jRadioButton7)
-                    .addComponent(jRadioButton8))
+                    .addComponent(jRadioButtonReducaoZero)
+                    .addComponent(jRadioButtonReducao30)
+                    .addComponent(jRadioButtonReducao60)
+                    .addComponent(jRadioButtonReducao100))
                 .addContainerGap())
         );
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Split Payment")));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Sem Split");
+        buttonGroup1.add(jRadioButtonSemSplit);
+        jRadioButtonSemSplit.setText("Sem Split");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Split Inteligente");
+        buttonGroup1.add(jRadioButtonSplitInteligente);
+        jRadioButtonSplitInteligente.setSelected(true);
+        jRadioButtonSplitInteligente.setText("Split Inteligente");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Split Simplificado");
+        buttonGroup1.add(jRadioButtonSplitSimplificado);
+        jRadioButtonSplitSimplificado.setText("Split Simplificado");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -843,11 +852,11 @@ public class FPrincipal extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jRadioButton1)
+                .addComponent(jRadioButtonSemSplit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(jRadioButtonSplitInteligente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
+                .addComponent(jRadioButtonSplitSimplificado)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -855,9 +864,9 @@ public class FPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jRadioButtonSemSplit)
+                    .addComponent(jRadioButtonSplitInteligente)
+                    .addComponent(jRadioButtonSplitSimplificado))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -982,19 +991,31 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Outras Informações")));
 
-        buttonGroup4.add(jRadioButton13);
-        jRadioButton13.setText("Operação Isenta");
+        buttonGroup4.add(jRadioButtonOperacaoIsenta);
+        jRadioButtonOperacaoIsenta.setText("Operação Isenta");
 
-        buttonGroup4.add(jRadioButton14);
-        jRadioButton14.setText("Crédito Presumido");
+        buttonGroup4.add(jRadioButtonCreditoPresumido);
+        jRadioButtonCreditoPresumido.setText("Crédito Presumido");
+        jRadioButtonCreditoPresumido.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonCreditoPresumidoStateChanged(evt);
+            }
+        });
 
-        buttonGroup4.add(jRadioButton15);
-        jRadioButton15.setText("Diferimento");
-
-        jTextField1.setEnabled(false);
+        buttonGroup4.add(jRadioButtonDiferimento);
+        jRadioButtonDiferimento.setText("Diferimento");
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel29.setText("%");
+
+        buttonGroup4.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Normal");
+        jRadioButton1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jRadioButton1VetoableChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -1004,15 +1025,20 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jRadioButton13)
+                        .addComponent(jRadioButtonOperacaoIsenta)
                         .addGap(34, 34, 34)
-                        .addComponent(jRadioButton15))
+                        .addComponent(jRadioButtonDiferimento))
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jRadioButton14)
+                        .addComponent(jRadioButtonCreditoPresumido)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel29)
+                        .addComponent(jTextFieldPercentualCreditoPresumido)))
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jRadioButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
@@ -1020,12 +1046,13 @@ public class FPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton13)
-                    .addComponent(jRadioButton15))
+                    .addComponent(jRadioButtonOperacaoIsenta)
+                    .addComponent(jRadioButtonDiferimento)
+                    .addComponent(jRadioButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton14)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonCreditoPresumido)
+                    .addComponent(jTextFieldPercentualCreditoPresumido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1080,31 +1107,25 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Operações com Mercadorias e Serviços", jPanel3);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOperacoesContribuinteA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Data", "Chave NF-e", "Valor do Imposto", "C/D"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTableOperacoesContribuinteA);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOperacoesContribuinteB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Data", "Chave NF-e", "Valor do Imposto", "Crédito a Apropriar", "Crédito Apropriado"
+                "Data", "Chave NF-e", "Valor do Imposto", "Crédito a Apropriar", "Crédito Apropriado", "Débito"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(jTableOperacoesContribuinteB);
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel32.setText("Operações do Contribuinte A");
@@ -1120,15 +1141,17 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
-                        .addComponent(jLabel32)
-                        .addGap(310, 310, 310)
+                        .addComponent(jLabel32)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
                         .addComponent(jLabel33)))
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1217,7 +1240,7 @@ public class FPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 814, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1345,42 +1368,138 @@ public class FPrincipal extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableOperacoes.getModel();
         Vector linha = new Vector();
 
+        RegrasCalculo regrasCalculo = new RegrasCalculo(
+                jTextFieldAliquotaIbs.getText(),
+                jTextFieldAliquotaCbs.getText(),
+                jTextFieldAliquotaIvaDual.getText(), jTextFieldTotal.getText());
+
+        long chave = Calendar.getInstance().getTimeInMillis();
+
         int codigoProduto = Integer.parseInt(jTextFieldCodigoProduto.getText());
         var produto = Produto.getProduto(codigoProduto);
 
         linha.add(jTextFieldDataOperacao.getText());
-        linha.add("CH0001");
+        linha.add("CH" + chave);
         linha.add(jTextFieldCodigoProduto.getText());
         linha.add(produto);
         linha.add(jTextFieldValor.getText());
         linha.add(jTextFieldQuantidade.getText());
-        
-
-        double aliquotaIbs = Double.parseDouble(jTextFieldAliquotaIbs.getText()) / 100;
-        double aliquotaCbs = Double.parseDouble(jTextFieldAliquotaCbs.getText()) / 100;
-        double aliquotaIva = Double.parseDouble(jTextFieldAliquotaIvaDual.getText()) / 100;
 
         double subTotal = Double.parseDouble(jTextFieldTotal.getText());
-        
+
         linha.add(decimalFormat.format(subTotal));
 
-        double ibs = aliquotaIbs * subTotal;
-        double cbs = aliquotaCbs * subTotal;
-        double ivaDual = aliquotaIva * subTotal;
-
-        linha.add(decimalFormat.format(ibs));
-        linha.add(decimalFormat.format(cbs));
-        linha.add(decimalFormat.format(ivaDual));
-
-        double total = (1 + aliquotaIva) * subTotal;
-
-        linha.add(decimalFormat.format(total));
+        linha.add(decimalFormat.format(regrasCalculo.calculaImpostoSemReducao().getValorIbs()));
+        linha.add(decimalFormat.format(regrasCalculo.calculaImpostoSemReducao().getValorCbs()));
+        linha.add(decimalFormat.format(regrasCalculo.calculaImpostoSemReducao().getValorIva()));
+        linha.add(decimalFormat.format(regrasCalculo.calculaImpostoSemReducao().getValorTotal()));
 
         model.addRow(linha);
+
+        chave++;
+
+        //registrar operação
+        Operacao operacao = new Operacao();
+        operacao.setIbs(regrasCalculo.getValorIbs());
+        operacao.setCbs(regrasCalculo.getValorCbs());
+        operacao.setIva(regrasCalculo.getValorIva());
+
+        if (jRadioButtonAB.isSelected()) {
+            operacao.setOrigem("Contribuinte A");
+            operacao.setDestino("Contribuinte B");
+        } else if (jRadioButtonBA.isSelected()) {
+            operacao.setOrigem("Contribuinte B");
+            operacao.setDestino("Contribuinte A");
+        } else {
+            operacao.setOrigem("Contribuinte B");
+            operacao.setDestino("Consumidor Final");
+        }
+
+        registrarOperacao(operacao);
+    }
+
+    /**
+     * Registrar as operações no IPA - Informações para Apuração
+     *
+     * @param operacao
+     */
+    public void registrarOperacao(Operacao operacao) {
+        DefaultTableModel modelContribuinteA = (DefaultTableModel) jTableOperacoesContribuinteA.getModel();
+        DefaultTableModel modelContribuinteB = (DefaultTableModel) jTableOperacoesContribuinteB.getModel();
+
+        Vector linhaContribuinteA = new Vector();
+        linhaContribuinteA.add(operacao.getDataOperacao());
+        linhaContribuinteA.add(operacao.getChave());
+        linhaContribuinteA.add(operacao.getIbs());
+
+        if (operacao.getOrigem().equals("Contribuinte A")) {
+            linhaContribuinteA.add("DÉBITO");
+        } else if (operacao.getDestino().equals("Contribuinte A")) {
+            linhaContribuinteA.add("CRÉDITO");
+        }
+
+        Vector linhaContribuinteB = new Vector();
+        linhaContribuinteB.add(operacao.getDataOperacao());
+        linhaContribuinteB.add(operacao.getChave());
+        linhaContribuinteB.add(operacao.getIbs());
+        
+        if (operacao.getOrigem().equals("Contribuinte B")) {
+            linhaContribuinteB.add("DÉBITO");
+        } else if (operacao.getDestino().equals("Contribuinte B")) {
+            linhaContribuinteB.add("CRÉDITO");
+        }
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
+        if (jRadioButtonAB.isSelected() || jRadioButtonBA.isSelected()) {
+            if (jComboBoxMunicipioDestinatario.getSelectedItem() == null
+                    || jComboBoxMunicipioEmitente.getSelectedItem() == null
+                    || jComboBoxUfEmitente.getSelectedItem() == null
+                    || jComboBoxUfDestinatario.getSelectedItem() == null) {
+
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios *");
+
+                return;
+            }
+        }
+
+        if (jRadioButtonBC.isSelected()) {
+            if (jComboBoxMunicipioDestinatario.getSelectedItem() == null
+                    || jComboBoxMunicipioConsumidorFinal.getSelectedItem() == null
+                    || jComboBoxUfConsumidorFinal.getSelectedItem() == null
+                    || jComboBoxUfDestinatario.getSelectedItem() == null) {
+
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios *");
+
+                return;
+            }
+        }
+
+        if (!jRadioButtonAB.isSelected()
+                && !jRadioButtonBA.isSelected()
+                && !jRadioButtonBC.isSelected()) {
+
+            JOptionPane.showMessageDialog(this, "Marque em qual sentido se deu a operação!");
+            return;
+        }
+
+        if (jTextFieldCodigoProduto.getText().equals("") || jTextFieldDescricaoProduto.getText().equals("")
+                || jTextFieldDataOperacao.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!");
+
+            return;
+        }
+
+        if (jRadioButtonCreditoPresumido.isSelected()) {
+            if (jTextFieldPercentualCreditoPresumido.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Preencha o percentual do Crédito Presumido!");
+
+                return;
+            }
+        }
+
         calculoRegraGeral();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1409,6 +1528,14 @@ public class FPrincipal extends javax.swing.JFrame {
             jPanelContribuinteA.setBackground(new java.awt.Color(242, 242, 242));
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonBCStateChanged
+
+    private void jRadioButtonCreditoPresumidoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonCreditoPresumidoStateChanged
+
+    }//GEN-LAST:event_jRadioButtonCreditoPresumidoStateChanged
+
+    private void jRadioButton1VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jRadioButton1VetoableChange
+
+    }//GEN-LAST:event_jRadioButton1VetoableChange
     DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -1498,6 +1625,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1530,29 +1658,28 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelContribuinteA;
     private javax.swing.JPanel jPanelContribuinteB;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JRadioButton jRadioButtonAB;
     private javax.swing.JRadioButton jRadioButtonBA;
     private javax.swing.JRadioButton jRadioButtonBC;
+    private javax.swing.JRadioButton jRadioButtonCreditoPresumido;
+    private javax.swing.JRadioButton jRadioButtonDiferimento;
+    private javax.swing.JRadioButton jRadioButtonOperacaoIsenta;
+    private javax.swing.JRadioButton jRadioButtonReducao100;
+    private javax.swing.JRadioButton jRadioButtonReducao30;
+    private javax.swing.JRadioButton jRadioButtonReducao60;
+    private javax.swing.JRadioButton jRadioButtonReducaoZero;
+    private javax.swing.JRadioButton jRadioButtonSemSplit;
+    private javax.swing.JRadioButton jRadioButtonSplitInteligente;
+    private javax.swing.JRadioButton jRadioButtonSplitSimplificado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableOperacoes;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTableOperacoesContribuinteA;
+    private javax.swing.JTable jTableOperacoesContribuinteB;
+    private javax.swing.JTextField jTextFieldAliquotaCashBack;
     private javax.swing.JTextField jTextFieldAliquotaCbs;
     private javax.swing.JTextField jTextFieldAliquotaIbs;
     private javax.swing.JTextField jTextFieldAliquotaIvaDual;
@@ -1567,6 +1694,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldDataOperacao;
     private javax.swing.JTextField jTextFieldDescricaoProduto;
     private javax.swing.JTextField jTextFieldNomeConsumidorFinal;
+    private javax.swing.JTextField jTextFieldPercentualCreditoPresumido;
     private javax.swing.JTextField jTextFieldQuantidade;
     private javax.swing.JTextField jTextFieldRazaoSocial;
     private javax.swing.JTextField jTextFieldRazaoSocialDestinatario;
