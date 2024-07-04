@@ -19,6 +19,87 @@ public class Operacao {
     private String destino;
     private String chave;
     private String dataOperacao;
+    private boolean semSplit;
+    private boolean splitSimplificado;
+    private boolean splitInteligente;
+    private boolean isento;
+    private boolean isentoComIsencao;
+    private boolean diferido;
+    private boolean presumido;
+    private double aliquotaSplitSimplificado;
+    private double valorIbsRetidoPorSplitSimplificado;
+
+    public double getValorIbsRetidoPorSplitSimplificado() {
+        return valorIbsRetidoPorSplitSimplificado;
+    }
+
+    public void setValorIbsRetidoPorSplitSimplificado(double valorIbsRetidoPorSplitSimplificado) {
+        this.valorIbsRetidoPorSplitSimplificado = valorIbsRetidoPorSplitSimplificado;
+    }
+
+    public double getAliquotaSplitSimplificado() {
+        return aliquotaSplitSimplificado;
+    }
+
+    public void setAliquotaSplitSimplificado(double aliquotaSplitSimplificado) {
+        this.aliquotaSplitSimplificado = aliquotaSplitSimplificado;
+    }
+
+    public boolean isSemSplit() {
+        return semSplit;
+    }
+
+    public void setSemSplit(boolean semSplit) {
+        this.semSplit = semSplit;
+    }
+
+    public boolean isSplitSimplificado() {
+        return splitSimplificado;
+    }
+
+    public void setSplitSimplificado(boolean splitSimplificado) {
+        this.splitSimplificado = splitSimplificado;
+    }
+
+    public boolean isSplitInteligente() {
+        return splitInteligente;
+    }
+
+    public void setSplitInteligente(boolean splitInteligente) {
+        this.splitInteligente = splitInteligente;
+    }
+
+    public boolean isIsento() {
+        return isento;
+    }
+
+    public void setIsento(boolean isento) {
+        this.isento = isento;
+    }
+
+    public boolean isIsentoComIsencao() {
+        return isentoComIsencao;
+    }
+
+    public void setIsentoComIsencao(boolean isentoComIsencao) {
+        this.isentoComIsencao = isentoComIsencao;
+    }
+
+    public boolean isDiferido() {
+        return diferido;
+    }
+
+    public void setDiferido(boolean diferido) {
+        this.diferido = diferido;
+    }
+
+    public boolean isPresumido() {
+        return presumido;
+    }
+
+    public void setPresumido(boolean presumido) {
+        this.presumido = presumido;
+    }
 
     public String getChave() {
         return chave;

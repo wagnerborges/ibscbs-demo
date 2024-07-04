@@ -9,7 +9,9 @@ br\gov\mg\sef\app\model\Produto.class
 br\gov\mg\sef\app\util\RegrasCalculo.class
 br\gov\mg\sef\app\forms\FPrincipal$4.class
 br\gov\mg\sef\app\model\Operacao.class
+br\gov\mg\sef\app\forms\FPrincipal$23.class
 br\gov\mg\sef\app\forms\FPrincipal$9.class
+br\gov\mg\sef\app\forms\FPrincipal$26.class
 br\gov\mg\sef\app\forms\FPrincipal$16.class
 br\gov\mg\sef\app\forms\FPrincipal$7.class
 br\gov\mg\sef\app\forms\FPrincipal$17.class
@@ -18,9 +20,12 @@ br\gov\mg\sef\app\forms\FPrincipal$10.class
 br\gov\mg\sef\app\forms\FPrincipal$20.class
 br\gov\mg\sef\app\forms\FPrincipal$19.class
 br\gov\mg\sef\app\forms\FPrincipal$14.class
+br\gov\mg\sef\app\forms\FPrincipal$24.class
 br\gov\mg\sef\app\forms\FPrincipal$15.class
 br\gov\mg\sef\app\forms\FPrincipal$5.class
+br\gov\mg\sef\app\forms\FPrincipal$25.class
 br\gov\mg\sef\app\factory\MockData.class
 br\gov\mg\sef\app\forms\FPrincipal$3.class
+br\gov\mg\sef\app\forms\FPrincipal$22.class
 br\gov\mg\sef\app\forms\FPrincipal$8.class
 br\gov\mg\sef\app\forms\FPrincipal$12.class

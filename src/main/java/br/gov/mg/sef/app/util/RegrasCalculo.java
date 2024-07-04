@@ -18,6 +18,7 @@ public class RegrasCalculo {
     private double valorCbs;
     private double valorIva;
     private double valorTotal;
+    private double valorRetidoPorSplitSimplificado;
 
     public RegrasCalculo(String aliquotaIbs, String aliquotaCbs, String aliquotaIva, String subTotal) {
         this.aliquotaIbs = Double.parseDouble(aliquotaIbs) / 100;
@@ -26,7 +27,7 @@ public class RegrasCalculo {
         this.subTotal = Double.parseDouble(subTotal);
     }
 
-    public RegrasCalculo calculaImpostoSemReducao() {
+    public RegrasCalculo calcularImpostoSemReducao() {
 
         this.valorIbs = aliquotaIbs * subTotal;
         this.valorCbs = aliquotaCbs * subTotal;
@@ -36,8 +37,8 @@ public class RegrasCalculo {
 
         return this;
     }
-    
-    public RegrasCalculo calculaImpostoComReducao(String valorReducao) {
+
+    public RegrasCalculo calcularImpostoComReducao(double valorReducao) {
 
         this.valorIbs = aliquotaIbs * subTotal;
         this.valorCbs = aliquotaCbs * subTotal;
@@ -46,6 +47,22 @@ public class RegrasCalculo {
         this.valorTotal = (1 + aliquotaIva) * subTotal;
 
         return this;
+    }
+
+    public double calcularRetencaoComSplitSimplificado(double aliquotaSplitSimplificado) {
+
+        
+        this.valorRetidoPorSplitSimplificado = (aliquotaSplitSimplificado / 100) * this.valorIbs;
+
+        return this.valorRetidoPorSplitSimplificado;
+    }
+
+    public double getValorRetidoPorSplitSimplificado() {
+        return valorRetidoPorSplitSimplificado;
+    }
+
+    public void setValorRetidoPorSplitSimplificado(double valorRetidoPorSplitSimplificado) {
+        this.valorRetidoPorSplitSimplificado = valorRetidoPorSplitSimplificado;
     }
 
     public double getAliquotaIbs() {
