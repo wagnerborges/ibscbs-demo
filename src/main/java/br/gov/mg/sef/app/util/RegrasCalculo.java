@@ -40,9 +40,13 @@ public class RegrasCalculo {
 
     public RegrasCalculo calcularImpostoComReducao(double valorReducao) {
 
-        this.valorIbs = aliquotaIbs * subTotal;
-        this.valorCbs = aliquotaCbs * subTotal;
-        this.valorIva = aliquotaIva * subTotal;
+        this.aliquotaIbs = this.aliquotaIbs * (1 - (valorReducao / 100));
+        this.aliquotaCbs = this.aliquotaCbs * (1 - (valorReducao / 100));
+        this.aliquotaIva = this.aliquotaIva * (1 - (valorReducao / 100));
+
+        this.valorIbs = this.aliquotaIbs * subTotal;
+        this.valorCbs = this.aliquotaCbs * subTotal;
+        this.valorIva = this.aliquotaIva * subTotal;
 
         this.valorTotal = (1 + aliquotaIva) * subTotal;
 
@@ -51,7 +55,6 @@ public class RegrasCalculo {
 
     public double calcularRetencaoComSplitSimplificado(double aliquotaSplitSimplificado) {
 
-        
         this.valorRetidoPorSplitSimplificado = (aliquotaSplitSimplificado / 100) * this.valorIbs;
 
         return this.valorRetidoPorSplitSimplificado;
