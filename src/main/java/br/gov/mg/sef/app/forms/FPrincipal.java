@@ -68,14 +68,15 @@ public class FPrincipal extends javax.swing.JFrame {
         jTableOperacoes.getColumnModel().getColumn(9).setCellRenderer(rendererAlinhaDireitaVermelho);
         jTableOperacoes.getColumnModel().getColumn(10).setCellRenderer(rendererAlinhaDireita);
 
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(0).setCellRenderer(rendererAlinhaCentralizado);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaCentralizado);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(2).setCellRenderer(rendererAlinhaDireitaVermelho);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(3).setCellRenderer(rendererAlinhaDireitaVermelho);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(4).setCellRenderer(rendererAlinhaDireitaAzul);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(5).setCellRenderer(rendererDebitoCredito);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(6).setCellRenderer(rendererAlinhaDireitaVermelho);
-        jTableOperacoesContribuinteA.getColumnModel().getColumn(7).setCellRenderer(rendererFormaLiquidacao);
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(0).setCellRenderer(rendererAlinhaCentralizado); //Data
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaCentralizado); //Chave
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(2).setCellRenderer(rendererAlinhaDireitaVermelho); //valor do imposto
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(3).setCellRenderer(rendererAlinhaDireitaVermelho); // retido por split
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(4).setCellRenderer(rendererAlinhaDireitaAzul); // a apriopriar
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(5).setCellRenderer(rendererAlinhaDireitaAzul); // apropriado
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(6).setCellRenderer(rendererDebitoCredito); //Credito/debito/isencao
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(7).setCellRenderer(rendererAlinhaDireitaVermelho); //saldo a liquidar
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(8).setCellRenderer(rendererFormaLiquidacao); //forma liquidação
 
         jTableOperacoesContribuinteB.getColumnModel().getColumn(0).setCellRenderer(rendererAlinhaCentralizado); //Data
         jTableOperacoesContribuinteB.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaCentralizado); //Chave
@@ -784,7 +785,6 @@ public class FPrincipal extends javax.swing.JFrame {
         jTextFieldDataOperacao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextFieldDataOperacao.setForeground(new java.awt.Color(0, 0, 204));
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\wagner.borges\\Downloads\\299068_add_sign_icon (1).png")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1178,7 +1178,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Chave NF-e", "Valor do Imposto", "Crédito a Apropriar", "Crédito Apropriado", "C/D/I", "Saldo a Liquidar", "Forma Liquidação"
+                "Data", "Chave NF-e", "Valor do Imposto", "Retido Split", "Crédito a Apropriar", "Crédito Apropriado", "C/D/I", "Saldo a Liquidar", "Forma Liquidação"
             }
         ));
         jScrollPane2.setViewportView(jTableOperacoesContribuinteA);
@@ -1366,12 +1366,11 @@ public class FPrincipal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 27, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1704,10 +1703,6 @@ public class FPrincipal extends javax.swing.JFrame {
         linhaContribuinteA.add(operacao.getChave());
         linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
 
-        linhaContribuinteA.add("-");
-        linhaContribuinteA.add("-");
-        linhaContribuinteA.add("DÉBITO");
-
         Vector linhaContribuinteB = new Vector();
         linhaContribuinteB.add(operacao.getDataOperacao());
         linhaContribuinteB.add(operacao.getChave());
@@ -1721,20 +1716,29 @@ public class FPrincipal extends javax.swing.JFrame {
             linhaContribuinteB.add("-");
             linhaContribuinteB.add("-");
 
-            linhaContribuinteA.add("0");
+            linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
+            linhaContribuinteA.add("-");
+            linhaContribuinteA.add("-");
+            linhaContribuinteA.add("DÉBITO");
+            linhaContribuinteA.add(0);
+
             linhaContribuinteA.add("SI");
 
         } else if (operacao.isSemSplit()) {
             linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
-            linhaContribuinteB.add(decimalFormat.format(0));
+            linhaContribuinteB.add("-");
             linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
-            linhaContribuinteB.add(decimalFormat.format(0));
+            linhaContribuinteB.add("-");
             linhaContribuinteB.add("CRÉDITO");
             linhaContribuinteB.add("-");
             linhaContribuinteB.add("-");
-            
 
-            linhaContribuinteA.add(operacao.getIbs());
+            linhaContribuinteA.add(decimalFormat.format(0));
+            linhaContribuinteA.add("-");
+            linhaContribuinteA.add("-");
+            linhaContribuinteA.add("DÉBITO");
+            linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
+
             linhaContribuinteA.add("SS");
         } else {
 
@@ -1757,11 +1761,11 @@ public class FPrincipal extends javax.swing.JFrame {
         linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
 
         linhaContribuinteB.add(decimalFormat.format(operacao.getValorIbsRetidoPorSplitSimplificado()));
-        
+
         linhaContribuinteB.add("-");
         linhaContribuinteB.add("-");
         linhaContribuinteB.add("DÉBITO");
-        
+
         if (operacao.isSplitInteligente()) {
             linhaContribuinteB.add("0");
             linhaContribuinteB.add("SI");
@@ -1773,8 +1777,6 @@ public class FPrincipal extends javax.swing.JFrame {
             linhaContribuinteB.add(decimalFormat.format(saldoLiquidar));
             linhaContribuinteB.add("SP");
         }
-
-        
 
         linhaContribuinteB.add(operacao.getIbs());
         modelContribuinteB.addRow(linhaContribuinteB);
@@ -1788,39 +1790,51 @@ public class FPrincipal extends javax.swing.JFrame {
         Vector linhaContribuinteB = new Vector();
         linhaContribuinteB.add(operacao.getDataOperacao());
         linhaContribuinteB.add(operacao.getChave());
-        linhaContribuinteB.add(operacao.getIbs());
-
-        linhaContribuinteB.add("-");
-        linhaContribuinteB.add("-");
-        linhaContribuinteB.add("DÉBITO");
+        linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
 
         Vector linhaContribuinteA = new Vector();
         linhaContribuinteA.add(operacao.getDataOperacao());
         linhaContribuinteA.add(operacao.getChave());
-        linhaContribuinteA.add(operacao.getIbs());
 
         if (operacao.isSplitInteligente()) {
-            linhaContribuinteA.add("0");
-            linhaContribuinteA.add(operacao.getIbs());
+            linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
+            linhaContribuinteA.add("-");
+            linhaContribuinteA.add(decimalFormat.format(0));
+            linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
             linhaContribuinteA.add("CRÉDITO");
             linhaContribuinteA.add("-");
             linhaContribuinteA.add("-");
 
+            linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
+            linhaContribuinteB.add("-");
+            linhaContribuinteB.add("-");
+            linhaContribuinteB.add("DÉBITO");
             linhaContribuinteB.add(0);
+
             linhaContribuinteB.add("SI");
 
         } else if (operacao.isSemSplit()) {
-            linhaContribuinteA.add(operacao.getIbs());
-            linhaContribuinteA.add(0);
+            linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
+            linhaContribuinteA.add("-");
+            linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
+            linhaContribuinteA.add("-");
             linhaContribuinteA.add("CRÉDITO");
             linhaContribuinteA.add("-");
             linhaContribuinteA.add("-");
 
-            linhaContribuinteB.add(operacao.getIbs());
+            linhaContribuinteB.add(decimalFormat.format(0));
+            linhaContribuinteB.add("-");
+            linhaContribuinteB.add("-");
+            linhaContribuinteB.add("DÉBITO");
+            linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
+
             linhaContribuinteB.add("SS");
         } else {
 
         }
+
+        linhaContribuinteA.add("-");
+        linhaContribuinteA.add("-");
 
         modelContribuinteB.addRow(linhaContribuinteB);
         modelContribuinteA.addRow(linhaContribuinteA);
