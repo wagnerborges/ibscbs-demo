@@ -5,6 +5,8 @@ br\gov\mg\sef\app\forms\FPrincipal.class
 br\gov\mg\sef\app\forms\FPrincipal$21.class
 br\gov\mg\sef\app\forms\FPrincipal$13.class
 br\gov\mg\sef\app\forms\FPrincipal$6.class
+br\gov\mg\sef\app\util\UtilTesterMain.class
+br\gov\mg\sef\app\model\Apuracao.class
 br\gov\mg\sef\app\model\Produto.class
 br\gov\mg\sef\app\util\RegrasCalculo.class
 br\gov\mg\sef\app\forms\FPrincipal$4.class
@@ -14,6 +16,7 @@ br\gov\mg\sef\app\forms\FPrincipal$9.class
 br\gov\mg\sef\app\forms\FPrincipal$26.class
 br\gov\mg\sef\app\forms\FPrincipal$16.class
 br\gov\mg\sef\app\forms\FPrincipal$7.class
+br\gov\mg\sef\app\forms\FPrincipal$27.class
 br\gov\mg\sef\app\forms\FPrincipal$17.class
 br\gov\mg\sef\app\forms\FPrincipal$2.class
 br\gov\mg\sef\app\forms\FPrincipal$10.class

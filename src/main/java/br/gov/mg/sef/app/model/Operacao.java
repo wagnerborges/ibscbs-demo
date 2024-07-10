@@ -15,10 +15,11 @@ public class Operacao {
     private double iva;
     private double aliquotaReducao;
     private double aliquotaCreditoPresumido;
-    private String origem;
-    private String destino;
-    private String chave;
-    private String dataOperacao;
+    private String origem = "";
+    private String destino = "";
+    private String chave = "";
+    private String dataOperacao = "";
+    private String reducaoAliquota = "-";
     private boolean semSplit;
     private boolean splitSimplificado;
     private boolean splitInteligente;
@@ -28,6 +29,41 @@ public class Operacao {
     private boolean presumido;
     private double aliquotaSplitSimplificado;
     private double valorIbsRetidoPorSplitSimplificado;
+    private String periodoRefencia;
+    private double valorPagamentoAvulso;
+    private String contribuintePagamentoAvulso = "";
+
+    public String getContribuintePagamentoAvulso() {
+        return contribuintePagamentoAvulso;
+    }
+
+    public void setContribuintePagamentoAvulso(String contribuintePagamentoAvulso) {
+        this.contribuintePagamentoAvulso = contribuintePagamentoAvulso;
+    }
+
+    public double getValorPagamentoAvulso() {
+        return valorPagamentoAvulso;
+    }
+
+    public void setValorPagamentoAvulso(double valorPagamentoAvulso) {
+        this.valorPagamentoAvulso = valorPagamentoAvulso;
+    }
+
+    public String getPeriodoRefencia() {
+        return periodoRefencia;
+    }
+
+    public void setPeriodoRefencia(String periodoRefencia) {
+        this.periodoRefencia = periodoRefencia;
+    }
+
+    public String getReducaoAliquota() {
+        return reducaoAliquota;
+    }
+
+    public void setReducaoAliquota(String reducaoAliquota) {
+        this.reducaoAliquota = reducaoAliquota;
+    }
 
     public double getValorIbsRetidoPorSplitSimplificado() {
         return valorIbsRetidoPorSplitSimplificado;

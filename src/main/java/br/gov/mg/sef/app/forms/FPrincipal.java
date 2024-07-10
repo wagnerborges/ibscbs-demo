@@ -13,9 +13,10 @@ import java.awt.Component;
 import java.awt.Font;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -34,7 +35,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     private DecimalFormat decimalFormat = new DecimalFormat("#,##0.##");
-    private Random random = new Random();
+    private List<Operacao> listaOperacoes = new ArrayList<>();
 
     /**
      * Creates new form FPrincipal
@@ -53,8 +54,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jTextFieldDataOperacao.setText(data);
         jComboBoxNotas.addItem("");
-        
-        
+
         jTableOperacoes.getColumnModel().getColumn(0).setCellRenderer(rendererAlinhaCentralizado);
         jTableOperacoes.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaCentralizado);
         jTableOperacoes.getColumnModel().getColumn(2).setCellRenderer(rendererAlinhaCentralizado);
@@ -68,6 +68,12 @@ public class FPrincipal extends javax.swing.JFrame {
         jTableOperacoes.getColumnModel().getColumn(9).setCellRenderer(rendererAlinhaDireitaVermelho);
         jTableOperacoes.getColumnModel().getColumn(10).setCellRenderer(rendererAlinhaDireita);
 
+        jTableApuracaoContribuinteA.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaDireitaAzul);
+        jTableApuracaoContribuinteA.getColumnModel().getColumn(2).setCellRenderer(rendererAlinhaDireitaVermelho);
+
+        jTableApuracaoContribuinteB.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaDireitaAzul);
+        jTableApuracaoContribuinteB.getColumnModel().getColumn(2).setCellRenderer(rendererAlinhaDireitaVermelho);
+
         jTableOperacoesContribuinteA.getColumnModel().getColumn(0).setCellRenderer(rendererAlinhaCentralizado); //Data
         jTableOperacoesContribuinteA.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaCentralizado); //Chave
         jTableOperacoesContribuinteA.getColumnModel().getColumn(2).setCellRenderer(rendererAlinhaDireitaVermelho); //valor do imposto
@@ -77,6 +83,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jTableOperacoesContribuinteA.getColumnModel().getColumn(6).setCellRenderer(rendererDebitoCredito); //Credito/debito/isencao
         jTableOperacoesContribuinteA.getColumnModel().getColumn(7).setCellRenderer(rendererAlinhaDireitaVermelho); //saldo a liquidar
         jTableOperacoesContribuinteA.getColumnModel().getColumn(8).setCellRenderer(rendererFormaLiquidacao); //forma liquidação
+        jTableOperacoesContribuinteA.getColumnModel().getColumn(9).setCellRenderer(rendererAlinhaCentralizadoNegrito); //redução
 
         jTableOperacoesContribuinteB.getColumnModel().getColumn(0).setCellRenderer(rendererAlinhaCentralizado); //Data
         jTableOperacoesContribuinteB.getColumnModel().getColumn(1).setCellRenderer(rendererAlinhaCentralizado); //Chave
@@ -87,6 +94,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jTableOperacoesContribuinteB.getColumnModel().getColumn(6).setCellRenderer(rendererDebitoCredito); //Credito/debito/isencao
         jTableOperacoesContribuinteB.getColumnModel().getColumn(7).setCellRenderer(rendererAlinhaDireitaVermelho); //saldo a liquidar
         jTableOperacoesContribuinteB.getColumnModel().getColumn(8).setCellRenderer(rendererFormaLiquidacao); //forma liquidação
+        jTableOperacoesContribuinteB.getColumnModel().getColumn(9).setCellRenderer(rendererAlinhaCentralizadoNegrito); //redução
 
     }
 
@@ -127,7 +135,7 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
         }
-                
+
     }
 
     /**
@@ -221,16 +229,6 @@ public class FPrincipal extends javax.swing.JFrame {
         jTableOperacoesContribuinteB = new javax.swing.JTable();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jComboBoxContribuinte = new javax.swing.JComboBox<>();
@@ -242,7 +240,29 @@ public class FPrincipal extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel18 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableApuracaoContribuinteA = new javax.swing.JTable();
+        jLabel43 = new javax.swing.JLabel();
+        jLabelSaldoContribuinteA = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableApuracaoContribuinteB = new javax.swing.JTable();
+        jLabel45 = new javax.swing.JLabel();
+        jLabelSaldoContribuinteB = new javax.swing.JLabel();
         jPanelComiteGestor = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTableArrecadacaoEstados = new javax.swing.JTable();
+        jLabel35 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableArrecadacaoMunicipios = new javax.swing.JTable();
+        jLabel36 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableCashback = new javax.swing.JTable();
+        jLabel37 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTableApuracoes = new javax.swing.JTable();
+        jLabel38 = new javax.swing.JLabel();
         jPanelReparticao = new javax.swing.JPanel();
         jPanelConfiguracoes = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -937,7 +957,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Chave NF-e", "Valor do Imposto", "Retido Split", "Crédito a Apropriar", "Crédito Apropriado", "C/D/I", "Saldo a Liquidar", "Forma Liquidação"
+                "Data", "Chave NF-e", "Valor do Imposto", "Retido Split", "Crédito a Apropriar", "Crédito Apropriado", "C/D/I", "Saldo a Liquidar", "Forma Liquidação", "Redução Aliq."
             }
         ));
         jScrollPane2.setViewportView(jTableOperacoesContribuinteA);
@@ -947,7 +967,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Chave NF-e", "Valor do Imposto", "Retido Split", "Crédito a Apropriar", "Crédito Apropriado", "C/D/I", "Saldo a Liquidar", "Forma Liquidação"
+                "Data", "Chave NF-e", "Valor do Imposto", "Retido Split", "Crédito a Apropriar", "Crédito Apropriado", "C/D/I", "Saldo a Liquidar", "Forma Liquidação", "Redução Aliq."
             }
         ));
         jScrollPane3.setViewportView(jTableOperacoesContribuinteB);
@@ -957,97 +977,6 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel33.setText("Operações do Contribuinte B");
-
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Apuração do Contribuinte A"));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Data", "Crédito", "Débito"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable1);
-
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel35.setText("Saldo do Período........... :");
-
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel38.setText("0,00");
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 46, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel38))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Apuração do Contribuinte B"));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Data", "Crédito", "Débito"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable2);
-
-        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel36.setText("Saldo do Período........... :");
-
-        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel37.setText("0,00");
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel37))
-                .addContainerGap())
-        );
 
         jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()), "Recolhimentos Avulsos"));
 
@@ -1112,75 +1041,262 @@ public class FPrincipal extends javax.swing.JFrame {
         jPanelInformacoesApuracao.setLayout(jPanelInformacoesApuracaoLayout);
         jPanelInformacoesApuracaoLayout.setHorizontalGroup(
             jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
-                .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInformacoesApuracaoLayout.createSequentialGroup()
+                .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelInformacoesApuracaoLayout.createSequentialGroup()
                         .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
-                                .addGap(333, 333, 333)
-                                .addComponent(jLabel33))
+                                .addGap(14, 14, 14)
+                                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
-                                .addGap(338, 338, 338)
-                                .addComponent(jLabel32)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(570, 570, 570)
+                                .addComponent(jLabel32))
+                            .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
+                                .addGap(569, 569, 569)
+                                .addComponent(jLabel33)))
+                        .addGap(0, 454, Short.MAX_VALUE))
                     .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 27, Short.MAX_VALUE)
-                        .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap()
+                        .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane2))))
                 .addContainerGap())
         );
         jPanelInformacoesApuracaoLayout.setVerticalGroup(
             jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInformacoesApuracaoLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelInformacoesApuracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Informações para Apuração - IPA", new javax.swing.ImageIcon(getClass().getResource("/imagens/calc.png")), jPanelInformacoesApuracao); // NOI18N
+        jTabbedPane2.addTab("Informações para Apuração - IPA", new javax.swing.ImageIcon(getClass().getResource("/imagens/nfe.png")), jPanelInformacoesApuracao); // NOI18N
 
         jPanel18.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Apuração do Contribuinte A", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jTableApuracaoContribuinteA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data", "Crédito", "Débito"
+            }
+        ));
+        jScrollPane6.setViewportView(jTableApuracaoContribuinteA);
+
+        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel43.setText("Saldo do Período........... :");
+
+        jLabelSaldoContribuinteA.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelSaldoContribuinteA.setForeground(new java.awt.Color(0, 0, 255));
+        jLabelSaldoContribuinteA.setText("0,00");
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSaldoContribuinteA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 46, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43)
+                    .addComponent(jLabelSaldoContribuinteA))
+                .addContainerGap())
+        );
+
+        jPanel22.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Apuração do Contribuinte B", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jTableApuracaoContribuinteB.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data", "Crédito", "Débito"
+            }
+        ));
+        jScrollPane7.setViewportView(jTableApuracaoContribuinteB);
+
+        jLabel45.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel45.setText("Saldo do Período........... :");
+
+        jLabelSaldoContribuinteB.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelSaldoContribuinteB.setForeground(new java.awt.Color(0, 0, 255));
+        jLabelSaldoContribuinteB.setText("0,00");
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSaldoContribuinteB, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 46, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel45)
+                    .addComponent(jLabelSaldoContribuinteB))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1396, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(225, 225, 225)
+                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
+                .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(308, 308, 308))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 752, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Apuração", jPanel18);
+        jTabbedPane2.addTab("Apuração", new javax.swing.ImageIcon(getClass().getResource("/imagens/calc.png")), jPanel18); // NOI18N
+
+        jTableArrecadacaoEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Período Referência", "UF", "Arrecadação"
+            }
+        ));
+        jScrollPane8.setViewportView(jTableArrecadacaoEstados);
+
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel35.setText("Arrecadação dos Estados");
+
+        jTableArrecadacaoMunicipios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Período de Referência", "Município", "Arrecadação"
+            }
+        ));
+        jScrollPane4.setViewportView(jTableArrecadacaoMunicipios);
+
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel36.setText("Arrecadação dos Municípios");
+
+        jTableCashback.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data", "DF-e", "CPF", "Chashback"
+            }
+        ));
+        jScrollPane5.setViewportView(jTableCashback);
+
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel37.setText("Cashback");
+
+        jTableApuracoes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Período Referência", "Contribuinte", "Crédito", "Débito", "Saldo", "Recolhimento"
+            }
+        ));
+        jScrollPane9.setViewportView(jTableApuracoes);
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel38.setText("Apurações");
 
         javax.swing.GroupLayout jPanelComiteGestorLayout = new javax.swing.GroupLayout(jPanelComiteGestor);
         jPanelComiteGestor.setLayout(jPanelComiteGestorLayout);
         jPanelComiteGestorLayout.setHorizontalGroup(
             jPanelComiteGestorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1396, Short.MAX_VALUE)
+            .addGroup(jPanelComiteGestorLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabel35)
+                .addGap(240, 240, 240)
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel37)
+                .addGap(236, 236, 236))
+            .addGroup(jPanelComiteGestorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelComiteGestorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelComiteGestorLayout.createSequentialGroup()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 41, Short.MAX_VALUE))
+            .addGroup(jPanelComiteGestorLayout.createSequentialGroup()
+                .addGap(641, 641, 641)
+                .addComponent(jLabel38)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelComiteGestorLayout.setVerticalGroup(
             jPanelComiteGestorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 752, Short.MAX_VALUE)
+            .addGroup(jPanelComiteGestorLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanelComiteGestorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelComiteGestorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Comitê Gestor", new javax.swing.ImageIcon(getClass().getResource("/imagens/comite-gestor.png")), jPanelComiteGestor); // NOI18N
@@ -1355,7 +1471,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Outras Configurações"));
 
-        jLabel28.setText("Alíquota Cash Back %");
+        jLabel28.setText("Alíquota Cashback %");
 
         jTextFieldAliquotaCashBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTextFieldAliquotaCashBack.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1483,9 +1599,9 @@ public class FPrincipal extends javax.swing.JFrame {
 
         if (item.equals("MG")) {
 
+            jComboBoxMunicipioDestinatario.addItem("Belo Horizonte");
             jComboBoxMunicipioEmitente.addItem("Betim");
             jComboBoxMunicipioEmitente.addItem("Contagem");
-            jComboBoxMunicipioEmitente.addItem("Belo Horizonte");
             jComboBoxMunicipioEmitente.addItem("Uberlândia");
         }
 
@@ -1506,9 +1622,9 @@ public class FPrincipal extends javax.swing.JFrame {
 
         if (item.equals("MG")) {
 
+            jComboBoxMunicipioDestinatario.addItem("Belo Horizonte");
             jComboBoxMunicipioDestinatario.addItem("Betim");
             jComboBoxMunicipioDestinatario.addItem("Contagem");
-            jComboBoxMunicipioDestinatario.addItem("Belo Horizonte");
             jComboBoxMunicipioDestinatario.addItem("Uberlândia");
         }
 
@@ -1528,9 +1644,9 @@ public class FPrincipal extends javax.swing.JFrame {
 
         if (item.equals("MG")) {
 
+            jComboBoxMunicipioConsumidorFinal.addItem("Belo Horizonte");
             jComboBoxMunicipioConsumidorFinal.addItem("Betim");
             jComboBoxMunicipioConsumidorFinal.addItem("Contagem");
-            jComboBoxMunicipioConsumidorFinal.addItem("Belo Horizonte");
             jComboBoxMunicipioConsumidorFinal.addItem("Uberlândia");
         }
 
@@ -1592,6 +1708,8 @@ public class FPrincipal extends javax.swing.JFrame {
         Vector linha = new Vector();
         String chave = "";
 
+        Operacao operacao = new Operacao();
+
         RegrasCalculo regrasCalculo = new RegrasCalculo(
                 jTextFieldAliquotaIbs.getText(),
                 jTextFieldAliquotaCbs.getText(),
@@ -1620,22 +1738,25 @@ public class FPrincipal extends javax.swing.JFrame {
             linha.add(decimalFormat.format(regrasCalculo.getValorIva()));
             linha.add(decimalFormat.format(regrasCalculo.getValorTotal()));
 
-        //imposto com redução de alíquota
+            //imposto com redução de alíquota
         } else if (jRadioButtonReducao30.isSelected()
                 || jRadioButtonReducao60.isSelected()
                 || jRadioButtonReducao100.isSelected()) {
 
-            double reducao; 
+            double reducao;
             if (jRadioButtonReducao30.isSelected()) {
                 reducao = 30;
+                operacao.setReducaoAliquota("30%");
             } else if (jRadioButtonReducao60.isSelected()) {
                 reducao = 60;
+                operacao.setReducaoAliquota("60%");
             } else {
                 reducao = 100;
+                operacao.setReducaoAliquota("100%");
             }
 
             regrasCalculo.calcularImpostoComReducao(reducao);
-            
+
             linha.add(decimalFormat.format(regrasCalculo.getValorIbs()));
             linha.add(decimalFormat.format(regrasCalculo.getValorCbs()));
             linha.add(decimalFormat.format(regrasCalculo.getValorIva()));
@@ -1644,13 +1765,13 @@ public class FPrincipal extends javax.swing.JFrame {
 
         model.addRow(linha);
 
-        //registrar operação
-        Operacao operacao = new Operacao();
-
+        //registrar operação       
         operacao.setIbs(regrasCalculo.getValorIbs());
         operacao.setCbs(regrasCalculo.getValorCbs());
         operacao.setIva(regrasCalculo.getValorIva());
         operacao.setChave(chave);
+        operacao.setPeriodoRefencia(jTextFieldDataOperacao.getText().substring(3,
+                jTextFieldDataOperacao.getText().length()));
 
         operacao.setDataOperacao(jTextFieldDataOperacao.getText());
 
@@ -1701,6 +1822,41 @@ public class FPrincipal extends javax.swing.JFrame {
         } else {
             registrarOperacaoBA(operacao);
         }
+
+        listaOperacoes.add(operacao);
+
+        regrasCalculo.realizarApuracao(listaOperacoes);
+
+        //Alimentar tabelas de apuração
+        DefaultTableModel modelA = (DefaultTableModel) jTableApuracaoContribuinteA.getModel();
+
+        for (Vector line : regrasCalculo.getListaOperacoesContribuinteA()) {
+            modelA.addRow(line);
+        }
+
+        DefaultTableModel modelB = (DefaultTableModel) jTableApuracaoContribuinteB.getModel();
+
+        for (Vector line : regrasCalculo.getListaOperacoesContribuinteB()) {
+            modelB.addRow(line);
+        }
+
+        double saldoContribuinteA = regrasCalculo.calcularSaldoPeriodo(modelA);
+        double saldoContribuinteB = regrasCalculo.calcularSaldoPeriodo(modelB);
+
+        jLabelSaldoContribuinteA.setText(decimalFormat.format(saldoContribuinteA));
+        jLabelSaldoContribuinteB.setText(decimalFormat.format(saldoContribuinteB));
+
+        if (saldoContribuinteA > 0) {
+            jLabelSaldoContribuinteA.setForeground(Color.RED);
+        } else {
+            jLabelSaldoContribuinteA.setForeground(Color.BLUE);
+        }
+
+        if (saldoContribuinteB > 0) {
+            jLabelSaldoContribuinteB.setForeground(Color.RED);
+        } else {
+            jLabelSaldoContribuinteB.setForeground(Color.BLUE);
+        }
     }
 
     /**
@@ -1729,6 +1885,7 @@ public class FPrincipal extends javax.swing.JFrame {
             linhaContribuinteB.add("CRÉDITO");
             linhaContribuinteB.add("-");
             linhaContribuinteB.add("-");
+            linhaContribuinteB.add(operacao.getReducaoAliquota());
 
             linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
             linhaContribuinteA.add("-");
@@ -1737,6 +1894,7 @@ public class FPrincipal extends javax.swing.JFrame {
             linhaContribuinteA.add(0);
 
             linhaContribuinteA.add("SI");
+            linhaContribuinteA.add(operacao.getReducaoAliquota());
 
         } else if (operacao.isSemSplit()) {
             linhaContribuinteB.add(decimalFormat.format(operacao.getIbs()));
@@ -1746,6 +1904,7 @@ public class FPrincipal extends javax.swing.JFrame {
             linhaContribuinteB.add("CRÉDITO");
             linhaContribuinteB.add("-");
             linhaContribuinteB.add("-");
+            linhaContribuinteB.add(operacao.getReducaoAliquota());
 
             linhaContribuinteA.add(decimalFormat.format(0));
             linhaContribuinteA.add("-");
@@ -1754,6 +1913,7 @@ public class FPrincipal extends javax.swing.JFrame {
             linhaContribuinteA.add(decimalFormat.format(operacao.getIbs()));
 
             linhaContribuinteA.add("SS");
+            linhaContribuinteA.add(operacao.getReducaoAliquota());
         } else {
 
         }
@@ -1783,13 +1943,16 @@ public class FPrincipal extends javax.swing.JFrame {
         if (operacao.isSplitInteligente()) {
             linhaContribuinteB.add("0");
             linhaContribuinteB.add("SI");
+            linhaContribuinteB.add("-");
         } else if (operacao.isSemSplit()) {
             linhaContribuinteB.add(operacao.getIbs());
             linhaContribuinteB.add("SS");
+            linhaContribuinteB.add("-");
         } else {
             double saldoLiquidar = operacao.getIbs() - operacao.getValorIbsRetidoPorSplitSimplificado();
             linhaContribuinteB.add(decimalFormat.format(saldoLiquidar));
             linhaContribuinteB.add("SP");
+            linhaContribuinteB.add("-");
         }
 
         linhaContribuinteB.add(operacao.getIbs());
@@ -2025,6 +2188,17 @@ public class FPrincipal extends javax.swing.JFrame {
         }
     };
 
+    DefaultTableCellRenderer rendererAlinhaCentralizadoNegrito = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            c.setFont(c.getFont().deriveFont(Font.BOLD));
+            this.setHorizontalAlignment(CENTER);
+            return c;
+        }
+    };
+
     /**
      * @param args the command line arguments
      */
@@ -2120,11 +2294,15 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelSaldoContribuinteA;
+    private javax.swing.JLabel jLabelSaldoContribuinteB;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -2133,15 +2311,15 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -2174,9 +2352,17 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableApuracaoContribuinteA;
+    private javax.swing.JTable jTableApuracaoContribuinteB;
+    private javax.swing.JTable jTableApuracoes;
+    private javax.swing.JTable jTableArrecadacaoEstados;
+    private javax.swing.JTable jTableArrecadacaoMunicipios;
+    private javax.swing.JTable jTableCashback;
     private javax.swing.JTable jTableOperacoes;
     private javax.swing.JTable jTableOperacoesContribuinteA;
     private javax.swing.JTable jTableOperacoesContribuinteB;

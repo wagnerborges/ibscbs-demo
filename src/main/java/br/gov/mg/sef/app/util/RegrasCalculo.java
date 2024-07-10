@@ -4,6 +4,12 @@
  */
 package br.gov.mg.sef.app.util;
 
+import br.gov.mg.sef.app.model.Operacao;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author wagner.borges
@@ -19,6 +25,10 @@ public class RegrasCalculo {
     private double valorIva;
     private double valorTotal;
     private double valorRetidoPorSplitSimplificado;
+    private List<Vector> listaOperacoesContribuinteA = new ArrayList();
+    private List<Vector> listaOperacoesContribuinteB = new ArrayList();
+
+    private List apuracoes = new ArrayList();
 
     public RegrasCalculo(String aliquotaIbs, String aliquotaCbs, String aliquotaIva, String subTotal) {
         this.aliquotaIbs = Double.parseDouble(aliquotaIbs) / 100;
@@ -53,11 +63,129 @@ public class RegrasCalculo {
         return this;
     }
 
+    public void realizarApuracao(List<Operacao> listaOperacoes) {
+
+        for (Operacao operacao : listaOperacoes) {
+
+            /**
+             * Apuração Contribuinte A *
+             */
+            if (operacao.getOrigem().equals("Contribuinte A") || operacao.getDestino().equals("Contribuinte A")) {
+                if (operacao.getOrigem().equals("Contribuinte A") && operacao.getDestino().equals("Contribuinte B")) {
+                    Vector linha = new Vector();
+                    linha.add(operacao.getDataOperacao());
+                    linha.add("-");
+                    linha.add(operacao.getIbs());
+
+                    listaOperacoesContribuinteA.add(linha);
+
+                    if (operacao.isSplitInteligente()) {
+                        Vector linha2 = new Vector();
+                        linha2.add(operacao.getDataOperacao());
+                        linha2.add(operacao.getIbs());
+                        linha2.add("-");
+
+                        listaOperacoesContribuinteA.add(linha2);
+                        listaOperacoesContribuinteB.add(linha2);
+                    }
+                }
+
+                if (operacao.getDestino().equals("Contribuinte A") && operacao.isSplitInteligente()) {
+                    Vector linha = new Vector();
+                    linha.add(operacao.getDataOperacao());
+                    linha.add(operacao.getIbs());
+                    linha.add("-");
+
+                    listaOperacoesContribuinteA.add(linha);
+
+                    Vector linhaB = new Vector();
+                    linhaB.add(operacao.getDataOperacao());
+                    linhaB.add("-");
+                    linhaB.add(operacao.getIbs());
+                    listaOperacoesContribuinteB.add(linhaB);
+
+                } else if (operacao.getDestino().equals("Contribuinte A") && !operacao.isSplitInteligente()) {
+                    Vector linhaB = new Vector();
+                    linhaB.add(operacao.getDataOperacao());
+                    linhaB.add("-");
+                    linhaB.add(operacao.getIbs());
+                    listaOperacoesContribuinteB.add(linhaB);
+                }
+            }
+
+            if (operacao.getOrigem().equals("Contribuinte B") && operacao.getDestino().equals("Consumidor Final")) {
+
+                if (operacao.isSplitInteligente() || operacao.isSplitSimplificado()) {
+                    Vector linhaDebito = new Vector();
+                    linhaDebito.add(operacao.getDataOperacao());
+                    linhaDebito.add("-");
+                    linhaDebito.add(operacao.getIbs());
+                    listaOperacoesContribuinteB.add(linhaDebito);
+
+                    Vector linhaCredito = new Vector();
+                    linhaCredito.add(operacao.getDataOperacao());
+                    linhaCredito.add(operacao.isSplitSimplificado() ? operacao.getValorIbsRetidoPorSplitSimplificado() : operacao.getIbs());
+                    linhaCredito.add("-");
+                    listaOperacoesContribuinteB.add(linhaCredito);
+
+                } else {
+                    Vector linhaDebito = new Vector();
+                    linhaDebito.add(operacao.getDataOperacao());
+                    linhaDebito.add("-");
+                    linhaDebito.add(operacao.getIbs());
+                    listaOperacoesContribuinteB.add(linhaDebito);
+                }
+            }
+        }
+    }
+
+    public double calcularSaldoPeriodo(DefaultTableModel model) {
+
+        double somaCredito = 0;
+        double somaDebito = 0;
+
+        for (int i = 0; i < model.getRowCount() - 1; i++) {
+            String strCredito = (String) model.getValueAt(i, 1).toString();
+            String strDebito = (String) model.getValueAt(i, 2).toString();
+
+            double credito = strCredito.equals("-") ? 0 : Double.parseDouble(strCredito);
+            double debito = strDebito.equals("-") ? 0 : Double.parseDouble(strDebito);
+
+            somaCredito = somaCredito + credito;
+            somaDebito = somaDebito + debito;
+        }
+        return somaDebito - somaCredito;
+    }
+
     public double calcularRetencaoComSplitSimplificado(double aliquotaSplitSimplificado) {
 
         this.valorRetidoPorSplitSimplificado = (aliquotaSplitSimplificado / 100) * this.valorIbs;
 
         return this.valorRetidoPorSplitSimplificado;
+    }
+
+    public List<Vector> getListaOperacoesContribuinteA() {
+        return listaOperacoesContribuinteA;
+    }
+
+    public void setListaOperacoesContribuinteA(List listaOperacoesContribuinteA) {
+        this.listaOperacoesContribuinteA = listaOperacoesContribuinteA;
+    }
+
+    public List<Vector> getListaOperacoesContribuinteB() {
+        return listaOperacoesContribuinteB;
+    }
+
+    public void setListaOperacoesContribuinteB(List listaOperacoesContribuinteB) {
+        this.listaOperacoesContribuinteB = listaOperacoesContribuinteB;
+    }
+
+    public List getApuracoes() {
+        return apuracoes;
+    }
+
+    public void setApuracoes(List apuracoes) {
+        this.apuracoes = apuracoes;
     }
 
     public double getValorRetidoPorSplitSimplificado() {
