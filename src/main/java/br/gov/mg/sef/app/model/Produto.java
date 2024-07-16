@@ -52,7 +52,13 @@ public class Produto {
         getListaProduto().add(new Produto(1007, "Teclado do Flamengo", 550));
         getListaProduto().add(new Produto(1008, "Cerveja do Flamengo", 250));
         getListaProduto().add(new Produto(1009, "Gasolina do Flamengo", 750));
+        
         getListaProduto().add(new Produto(1010, "Bola do Flamengo", 350));
+        getListaProduto().add(new Produto(1011, "Bola do Flamengo", 650));
+        
+        getListaProduto().add(new Produto(2001, "Bola de Futebol", 300));
+        getListaProduto().add(new Produto(2002, "Bola de Futebol", 500));
+        
     }
 
     /**

@@ -144,7 +144,7 @@ public class RegrasCalculo {
         double somaCredito = 0;
         double somaDebito = 0;
 
-        for (int i = 0; i < model.getRowCount() - 1; i++) {
+        for (int i = 0; i < model.getRowCount(); i++) {
             String strCredito = (String) model.getValueAt(i, 1).toString();
             String strDebito = (String) model.getValueAt(i, 2).toString();
 
